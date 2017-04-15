@@ -1,0 +1,64 @@
+body{
+	margin-bottom:10px;
+}
+
+thead {
+	background-color: #B78433;
+	color:#FFFFFF;
+}
+
+th {	
+	font-size:17px;
+}
+
+td {
+	font-size:17px;
+	background-color: #FFFFFF;
+	text-align:left;
+}
+
+.titulo {
+	color: #337ab7 !important;
+	font-size:18px;
+	font-style: italic;
+}
+
+.descricao {
+	color: #B78433 !important;
+}
+
+.page-header h1 {
+	 color: #337ab7;
+}
+
+.modal-header, h3 {
+    background-color: #337ab7;
+    color:#FFFFFF !important;
+    font-size: 30px;
+}
+
+.btn-lista{
+	background-color: #B78433;
+	border-color: #6A4F23;
+	color:#FFFFFF;
+	font-size:20px;
+}
+
+.btn-lista:hover,
+.btn-lista:focus {
+	background-color: #6A4F23;
+	border-color: #6A4F23;
+	color:#FFFFFF;
+}
+
+.table-responsive {
+	border:none;
+}
+
+.label-control {
+	font-size:17px;
+}
+
+.link-collapse {
+	cursor:pointer;
+}
