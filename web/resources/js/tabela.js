@@ -1,10 +1,25 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $('.data-table').DataTable({
-    	"paging":   true,
+        responsive: {
+            details: {
+                renderer: function (api, rowIdx, columns) {
+                    var data = $.map(columns, function (col, i) {
+                        return '<tr style="height:30px">' +
+                                '<td style="width:60px"><b>' + col.title + '</b></td>' +
+                                '<td>' + col.data + '</td>' +
+                                '</tr>';
+                    }).join('');
+                    return data ?
+                            $('<table/>').append(data) :
+                            false;
+                }
+            }
+        },
+        "paging": true,
         "ordering": true,
         "lengthMenu": [[5], [5]],
-        "language" : {
-        	"sEmptyTable": "Nenhum registro encontrado",
+        "language": {
+            "sEmptyTable": "Nenhum registro encontrado",
             "sInfo": "",
             "sInfoEmpty": "",
             "sInfoFiltered": "(Filtrados de _MAX_ registros)",
@@ -26,5 +41,7 @@ $(document).ready(function() {
                 "sSortDescending": ": Ordenar colunas de forma descendente"
             }
         }
-    });	    
-} );
+    });
+});
+
+
