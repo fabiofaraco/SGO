@@ -1,0 +1,53 @@
+.load-img {
+    display:none;
+}
+
+#loading {
+    background-color: #FFFFFF;
+    border:1px solid #ccc;
+    width:100px;
+    height:100px;
+    position:absolute;
+    top:60%;
+    left:56%;
+    margin-top: -50px;
+    margin-left: -50px;
+}
+
+.titulo
+{
+    color:#009999 !important;
+}
+
+.descricao 
+{
+    color: #7E7E7E !important;
+}
+
+.botao
+{
+    background-color: #009999;
+    color: #FFFFFF;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.botao:hover,
+.botao:focus {
+    background-color: #006B6B;
+    border-color: #006B6B;
+    color:#FFFFFF;
+}
+
+@media (max-width: 768px) { 
+    #loading {
+        margin-top: 80%;
+        left:50%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) { 
+    #loading {
+        left:62%;
+    }
+}

@@ -11,6 +11,7 @@
         <link href=<c:url value="/resources/bootstrap/css/bootstrap.min.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/mensagem.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/cadastro.css"/> rel="stylesheet"/>
+        <link href=<c:url value="/resources/css/lista.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/menu-principal.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/sb-admin.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/morris.css"/> rel="stylesheet"/>
@@ -54,7 +55,7 @@
                             <a href="#" id="aRequerente"><i class="fa fa-fw fa-users"></i> Requerentes</a>
                         </li>
                         <li id="liOcorrencia">
-                                <a href="#" id="aOcorrencia"><i class="fa fa-fw fa-ambulance"></i> Ocorrências</a>
+                            <a href="#" id="aOcorrencia"><i class="fa fa-fw fa-ambulance"></i> Ocorrências</a>
                         </li>
                         <li id="liProtocolo">
                             <a href="${pageContext.request.contextPath}/protocolo/lista"><i class="fa fa-fw fa-folder"></i> Protocolos</a>
@@ -76,7 +77,13 @@
                     </ul>
                 </div>
             </nav>
+
             <div id="conteudo"></div>
+
+            <div class="load-img">
+                <img id="loading" src=<c:url value="/resources/img/load.gif"/>>                
+            </div>           
+
         </form>
     </body>
 

@@ -66,7 +66,7 @@ body {
 .top-nav>.open>a:hover,
 .top-nav>.open>a:focus {
     color: #fff;
-    background-color: #000080;
+    background-color: #660000;
 }
 
 .top-nav>.open>.dropdown-menu {
@@ -135,7 +135,7 @@ ul.alert-dropdown {
     .side-nav li a:hover,
     .side-nav li a:focus {
         outline: none;
-        background-color: #0b03a3 !important;
+        background-color: #660000 !important;
     }
 }
 
@@ -228,37 +228,37 @@ ul.alert-dropdown {
 
 .nav,
 .navbar {
-	background-color: #000080;
-	border-color:#000080;
+    background-color: #990000;
+    border-color:#990000;
 }
 
 .side-nav {
-	background-color: #000080 !important;
-	color: #FFFFFF !important;
-}
+    background-color: #990000 !important;
+    color: #FFFFFF !important;
+}       
 
 .navbar-nav > .active > a {
-   color: #000;
-   background: #151567 !important;
- }
+    color: #000;
+    background: #660000 !important;
+}
 
 .navbar-nav > .active > a:hover, 
 .navbar-nav > .active > a:focus {
-      color: #000;
-      background: #151567 !important;
- }
- 
- nav a {
-	 color:#ffffff !important
+    color: #000;
+    background: #660000 !important;
+}
+
+nav a {
+    color:#ffffff !important
 }
 
 .navbar-toggle,
 .navbar-toggle:hover, 
 .navbar-toggle:focus {
-    background-color: #000080 !important;	
-	border-color: #151567 !important;
+    background-color: #990000 !important;	
+    border-color: #990000 !important;
 }
 
 #aLogout {
-	color:#151567 !important;
+    color:#990000 !important;
 }

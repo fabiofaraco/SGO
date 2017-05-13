@@ -6,7 +6,7 @@
 <div id="wrapper">
     <div class="container-fluid">
         <div class="page-header">
-            <h1>Cadastro de Usuários</h1>
+            <h1 class="titulo">Cadastro de Usuários</h1>
         </div>
         <c:import url="mensagem.jsp" />
         <div class="well">
@@ -16,13 +16,13 @@
 
             <div class="row">
                 <div class="col-md-6 col-sm-6">
-                    <div id="divNome" class="form-group">
+                    <div class="form-group">
                         <label class="descricao" for="nome">Nome</label>
                         <input type="text" class="form-control" id="nome" name="nome" value="${usuario.nome}" ${disabled} />
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
-                    <div id="divSobrenome" class="form-group">
+                    <div class="form-group">
                         <label class="descricao" for="sobrenome">Sobrenome</label>
                         <input type="text" class="form-control" id="sobrenome" name="sobrenome" value="${usuario.sobrenome}" ${disabled}/>
                     </div>
@@ -31,13 +31,13 @@
 
             <div class="row">
                 <div class="col-md-4 col-sm-4">
-                    <div id="divCpf" class="form-group">
+                    <div class="form-group">
                         <label class="descricao" for="cpf">CPF</label>
                         <input type="text" class="form-control mascara-cpf" id="cpf" name="cpf" value="${usuario.cpf}" ${disabled}/>
                     </div>
                 </div>
                 <div class="col-md-5 col-sm-5">
-                    <div id="divEmail" class="form-group">
+                    <div class="form-group">
                         <label class="descricao" for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" value="${usuario.email}" ${disabled}/>
                     </div>
@@ -46,7 +46,7 @@
 
             <div class="row">
                 <div class="col-md-4 col-sm-5">
-                    <div id="divPerfil" class="form-group">
+                    <div class="form-group">
                         <label class="descricao" for="perfil">Perfil</label>
                         <select class="form-control" id="perfil" name="perfil" ${disabled}>
                             <option value=""><c:out value="Selecione..."/></option>
@@ -60,14 +60,14 @@
 
             <div class="row">
                 <div class="col-md-4 col-sm-4">
-                    <div id="divSenha" class="form-group">
+                    <div class="form-group">
                         <label class="descricao" for="senha">Senha</label>
                         <input type="password" class="form-control" id="senha" name="senha" value="" ${disabled}/>
                     </div>
                 </div>
 
                 <div class="col-md-4 col-sm-4">
-                    <div id="divConfirmaSenha" class="form-group">
+                    <div class="form-group">
                         <label class="descricao" for="confirmaSenha">Confirma Senha</label>
                         <input type="password" class="form-control" id="confirmaSenha" name="confirmaSenha" value="" ${disabled} />
                     </div>
@@ -77,9 +77,8 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-4 col-md-2 ">
                     <div class="form-group">
-                        <button id="btnSalvar" type="button" class="btn btn-cadastro btn-sm col-xs-12" ${disabled}>
-                            <span id="load"></span> 
-                            <span id="btn-nome">Salvar</span>
+                        <button id="btnSalvar" type="button" class="btn botao btn-lg col-xs-12" ${disabled}>
+                            Salvar
                         </button>				  	
                     </div>
                 </div>

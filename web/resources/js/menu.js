@@ -1,3 +1,5 @@
+/* global carregarScriptPagina */
+
 $(document).ready(function ()
 {
     var contextPath = $("#contextPath").val();
@@ -14,7 +16,7 @@ $(document).ready(function ()
         
         $('#liUsuario').addClass('active');
 
-        $("#conteudo").load(contextPath + "/usuario/lista");
+        $("#conteudo").load(contextPath + "/usuario/lista", carregarScriptPagina);
     });
 
     $("#aRequerente").on("click", function () {

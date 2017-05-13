@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    onload = function () {
-        $('#liRequerente').addClass('active');
-    };
     
     $('#btnIncluirRequerente').on("click", function () {
         $('#frm').attr('action', 'cadastro');

@@ -1,65 +1,53 @@
+/* global carregaTabela */
+
 $(document).ready(function () {
-    $('.mascara-cpf').mask('999.999.999-99');
-    $('.mascara-data').mask('00/00/0000');
-    $('.mascara-telefone').mask('(00) 0000-0000');
-    $('.mascara-celular').mask('(00) 00000-0000');
 
-//	----------------------------------------------------------------------------------------------
+    carregarScriptPagina = function ()
+    {
+        $(".load-img").fadeOut();
 
-    (function ($) {
-        $.fn.criticar = function (options) {
-            return this.each(function () {
-                //$(".msg-danger").html(options.mensagem);
-                //$("#danger").fadeIn(1000);
-                alert(1);
-            });
-        };
+        $('.mascara-cpf').mask('999.999.999-99');
+        $('.mascara-data').mask('00/00/0000');
+        $('.mascara-telefone').mask('(00) 0000-0000');
+        $('.mascara-celular').mask('(00) 00000-0000');
 
-        $.fn.realizaCritica = function (options) {
-            return this.each(function () {
-                $('.msg-warning').html(options.mensagem);
-                $('#warning').css("display", "block");
-                $("#" + options.field).val("");
-                $(this).addClass("has-error has-feedback");
-                $('html, body').animate({scrollTop: 0}, 'slow');
-            });
-        };
-
-        //	------------------------------------------------------------------------------------------
-
-        $.fn.limparCritica = function () {
-            return this.each(function () {
-                $('#warning').css("display", "none");
-                $(this).removeClass("has-error has-feedback");
-            });
-        };
-
-
-
-    })(jQuery);
-
-//	----------------------------------------------------------------------------------------------
-    
-    
-
-
-    validaCampo = function (idCampo, divCampo, descCampo) {
-
-        if ($("#" + idCampo).val().trim() === "") {
-            $("#" + divCampo).realizaCritica({'mensagem': "Campo Obrigatório: " + descCampo, 'field': idCampo});
-
-            return false;
-        } else {
-            $("#" + divCampo).limparCritica();
-        }
-
-        return true;
+        carregaTabela();
     };
 
-//	----------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
 
-    validaCPF = function (cpf) {
-        strCPF = cpf;
+    exibirMensagemErro = function (mensagem)
+    {
+        limparMensagens();
+
+        $('html, body').animate({scrollTop: 0}, 'slow');
+        $(".msg-danger").html(mensagem);
+        $("#danger").fadeIn(1000);
+    };
+
+//  ----------------------------------------------------------------------------
+
+    exibirMensagemSucesso = function (mensagem)
+    {
+        limparMensagens();
+
+        $('html, body').animate({scrollTop: 0}, 'slow');
+        $(".msg-success").html(mensagem);
+        $("#success").fadeIn(1000);
+    };
+
+//  ----------------------------------------------------------------------------
+
+    limparMensagens = function ()
+    {
+        $("#success").fadeOut();
+        $("#danger").fadeOut();
+    };
+
+//  ----------------------------------------------------------------------------
+
+    validarCPF = function (cpf) {
+        var strCPF = cpf;
         strCPF = strCPF.replace(/[^\d]+/g, '');
 
         var Soma;
@@ -113,9 +101,9 @@ $(document).ready(function () {
         return cboll;
     };
 
-//	----------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
 
-    validaData = function (idCampo, divCampo, descCampo) {
+    validaData = function (idCampo) {
         var expReg = new RegExp("(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}");
         var data = $("#" + idCampo).val().trim();
         var ardt = data.split("/");
@@ -136,15 +124,61 @@ $(document).ready(function () {
         }
 
         if (erro) {
-            $("#" + divCampo).realizaCritica({'mensagem': "Data Inválida: " + descCampo, 'field': idCampo});
-
             return false;
-        } else {
-            $("#" + divCampo).limparCritica();
         }
 
         return true;
     };
 
-//	----------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
+
+    carregaTabela = function ()
+    {
+        $('.data-table').DataTable({
+            responsive: {
+                details: {
+                    renderer: function (api, rowIdx, columns) {
+                        var data = $.map(columns, function (col, i) {
+                            return '<tr style="height:30px">' +
+                                    '<td style="width:60px"><b>' + col.title + '</b></td>' +
+                                    '<td>' + col.data + '</td>' +
+                                    '</tr>';
+                        }).join('');
+                        return data ?
+                                $('<table/>').append(data) :
+                                false;
+                    }
+                }
+            },
+            "paging": true,
+            "ordering": true,
+            "lengthMenu": [[5], [5]],
+            "language": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "",
+                "sInfoEmpty": "",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sSearch": "Pesquisar",
+                "sLengthMenu": "",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            }
+        });
+    };
+    
+//  ----------------------------------------------------------------------------
+
 });
