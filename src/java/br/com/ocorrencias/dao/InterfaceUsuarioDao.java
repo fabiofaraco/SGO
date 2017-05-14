@@ -9,5 +9,5 @@ public interface InterfaceUsuarioDao extends Dao<Usuario> {
 
     public boolean validarCpf(String cpf, int id);
 
-    public List<Usuario> getListaFiltro(String filtro);
+    public List<Usuario> getListaFiltro(String nomeFiltro, String cpfFiltro);
 }

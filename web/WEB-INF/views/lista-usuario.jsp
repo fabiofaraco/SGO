@@ -7,6 +7,26 @@
             <h1 class="titulo">Lista de Usuários</h1>
         </div>
         <c:import url="mensagem.jsp" />
+        <div class="row filtro">
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input type="text" id="nomeFiltro" name="nomeFiltro" class="form-control" placeholder="Buscar Nome" value="${nomeFiltro}" />
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input type="text" id="cpfFiltro" name="cpfFiltro" class="form-control mascara-cpf" placeholder="Buscar CPF" value="${cpfFiltro}" />
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <button type="button" id="btnFiltro" name="btnFiltro" class="btn botao-filtro btn-block btn-sm" >Filtrar </button>
+                </div>
+            </div>
+        </div>
 
         <c:choose>
             <c:when test="${!empty usuarios}">
@@ -17,7 +37,7 @@
                                 <div class="col-sm-9 col-md-10">
                                     <div class="form-group">
                                         <div class="col-xs-12">
-                                            <h4 class="list-group-item-heading titulo">${usuario.nome} ${usuario.sobrenome}</h4>
+                                            <h4 class="list-group-item-heading titulo">${usuario.nome}</h4>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-5">
@@ -45,7 +65,7 @@
 
                                         <button type="button" class="btn btn-link btn-excluir" 
                                                 data-id-usuario="${usuario.id}" 
-                                                data-nome-usuario="${usuario.nome} ${usuario.sobrenome}"
+                                                data-nome-usuario="${usuario.nome}"
                                                 data-toggle="modal">
                                             <span class="glyphicon glyphicon-trash"></span> Remover
                                         </button>
@@ -54,37 +74,36 @@
                             </div>
                         </a>
                     </c:forEach>
-                </div>
-            </c:when>
-            <c:otherwise>
-                <div class="list-group">
-                    <a href="javascript:void(0);" class="list-group-item">
-                        <h4 class="descricao">Não há dados para serem exibidos</h4>
-                    </a>
-                </div>
-            </c:otherwise>
-        </c:choose>
-        <button id="btnIncluirUsuario" type="button" class="btn botao-lista col-xs-12 col-sm-4 col-sm-offset-4">Incluir</button>
+                </c:when>
+                <c:otherwise>
+                    <div class="list-group">
+                        <a href="javascript:void(0);" class="list-group-item">
+                            <h4 class="descricao">${msgConsulta}</h4>
+                        </a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+            <button id="btnIncluirUsuario" type="button" class="btn botao-lista col-xs-12 col-sm-4 col-sm-offset-4">Incluir</button>
 
-        <div class="modal fade" id="modal-excluir-usuario" role="dialog">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h3 class="modal-title titulo">Confirmação</h3>
-                    </div>
-                    <div class="modal-body">
-                        <h4 id="msgConfirmacao" class="descricao"></h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn botao btn-realiza-exclusao-usuario">Excluir</button>
-                        <button type="button" class="btn botao" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>    
+            <div class="modal fade" id="modal-excluir-usuario" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3 class="modal-title titulo">Confirmação</h3>
+                        </div>
+                        <div class="modal-body">
+                            <h4 id="msgConfirmacao" class="descricao"></h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn botao btn-realiza-exclusao-usuario">Excluir</button>
+                            <button type="button" class="btn botao" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>    
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 

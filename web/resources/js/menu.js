@@ -16,7 +16,7 @@ $(document).ready(function ()
         
         $('#liUsuario').addClass('active');
 
-        $("#conteudo").load(contextPath + "/usuario/lista", carregarScriptPagina);
+        ajaxLoad("/usuario/lista", null);
     });
 
     $("#aRequerente").on("click", function () {
@@ -24,7 +24,7 @@ $(document).ready(function ()
         
         $('#liRequerente').addClass('active');
 
-        $("#conteudo").load(contextPath + "/requerente/lista");
+        ajaxLoad("/requerente/lista", null);
     });
 
     $("#aOcorrencia").on("click", function () {
@@ -32,7 +32,7 @@ $(document).ready(function ()
         
         $('#liOcorrencia').addClass('active');
 
-        $("#conteudo").load(contextPath + "/ocorrencia/lista");
+        ajaxLoad("/ocorrencia/lista", null);
     });
     
 });

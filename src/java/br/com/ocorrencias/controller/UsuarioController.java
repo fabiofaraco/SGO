@@ -16,7 +16,7 @@ import br.com.ocorrencias.dao.GenericDao;
 import br.com.ocorrencias.dao.InterfaceUsuarioDao;
 import br.com.ocorrencias.dao.UsuarioDao;
 import br.com.ocorrencias.propertyEditor.PerfilPropertyEditor;
-import org.springframework.web.bind.annotation.RequestParam;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("usuario")
@@ -27,19 +27,18 @@ public class UsuarioController {
         binder.registerCustomEditor(Perfil.class, new PerfilPropertyEditor());
     }
 
-//	--------------------------------------------------------------------------------------------------------------	
+//  ----------------------------------------------------------------------------
+    
     @RequestMapping("/lista")
     public String getForm(Model model, String msg) {
-        Dao<Usuario> dao = new GenericDao<>(Usuario.class);
-        List<Usuario> usuarios = dao.getLista("select u from Usuario u order by u.nome, u.sobrenome");
-
-        model.addAttribute("usuarios", usuarios);
-        model.addAttribute("msgSuccess", msg);
+        model.addAttribute("usuarios", new ArrayList<>());
+        model.addAttribute("msgConsulta", "Para exibir um usuário realize a consulta através do filtro.");
 
         return "lista-usuario";
     }
 
-//	--------------------------------------------------------------------------------------------------------------	
+//  ----------------------------------------------------------------------------
+    
     @RequestMapping("/cadastro")
     public String getFormCadastro(Usuario usuario, Model model) {
         Dao<Perfil> dao = new GenericDao<>(Perfil.class);
@@ -50,9 +49,11 @@ public class UsuarioController {
         return "cadastro-usuario";
     }
 
-//	--------------------------------------------------------------------------------------------------------------	
+//  ----------------------------------------------------------------------------
+    
     @RequestMapping("/remover")
-    public @ResponseBody String removerUsuario(Usuario usuario, RedirectAttributes redirectAttributes) {
+    public @ResponseBody
+    String removerUsuario(Usuario usuario, RedirectAttributes redirectAttributes) {
         Dao<Usuario> dao = new GenericDao<>(Usuario.class);
         dao.remover(usuario.getId());
 
@@ -60,25 +61,30 @@ public class UsuarioController {
     }
 
 //	--------------------------------------------------------------------------------------------------------------	
-    @RequestMapping(value="/salvar")
-    public @ResponseBody String salvarUsuario(Usuario usuario, Model model) {
+    @RequestMapping(value = "/salvar")
+    public @ResponseBody
+    String salvarUsuario(Usuario usuario, Model model) {
         Dao<Usuario> dao = new GenericDao<>(Usuario.class);
         String msg;
 
         if (usuario.getId() == 0) {
             dao.incluir(usuario);
-            msg = "O usuário " + usuario.getNome() + " foi incluído com sucesso";
+            msg = "O usuário "
+                    + usuario.getNome()
+                    + " foi incluído com sucesso";
         } else {
             dao.alterar(usuario);
-            msg = "O usuário " + usuario.getNome() + " foi alterado com sucesso";
+            msg = "O usuário "
+                    + usuario.getNome()
+                    + " foi alterado com sucesso";
         }
-        
+
         return msg;
     }
 
 //	--------------------------------------------------------------------------------------------------------------	
     @RequestMapping("/carregar")
-    public String carregarUsuario(Usuario usuario, boolean visualiza, Model model) {
+    public String carregarUsuario(Usuario usuario, Model model) {
         Dao<Usuario> dao = new GenericDao<>(Usuario.class);
 
         Dao<Perfil> daoPerfil = new GenericDao<>(Perfil.class);
@@ -87,22 +93,23 @@ public class UsuarioController {
         model.addAttribute("usuario", dao.buscar(usuario.getId()));
         model.addAttribute("perfis", perfis);
 
-        if (visualiza) {
-            model.addAttribute("disabled", "disabled");
-        }
+        model.addAttribute("nomeFiltro", usuario.getNomeFiltro());
+        model.addAttribute("cpfFiltro", usuario.getCpfFiltro());
 
         return "cadastro-usuario";
     }
 
 //	--------------------------------------------------------------------------------------------------------------	
     @RequestMapping("/filtrar")
-    public String filtrar(@RequestParam("filtro") String filtro, Model model) 
-    {
+    public String filtrar(String nomeFiltro, String cpfFiltro, Model model) {
         InterfaceUsuarioDao dao = new UsuarioDao();
-        List<Usuario> usuarios = dao.getListaFiltro(filtro);
+        List<Usuario> usuarios = dao.getListaFiltro(nomeFiltro, cpfFiltro);
 
         model.addAttribute("usuarios", usuarios);
-        
+        model.addAttribute("msgConsulta", "Não há dados para serem exibidos para esta consulta.");
+        model.addAttribute("nomeFiltro", nomeFiltro);
+        model.addAttribute("cpfFiltro", cpfFiltro);
+
         return "lista-usuario";
     }
 

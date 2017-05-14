@@ -51,15 +51,35 @@ public class UsuarioDao extends GenericDao<Usuario> implements InterfaceUsuarioD
     }
 
     @Override
-    public List<Usuario> getListaFiltro(String filtro) {
+    public List<Usuario> getListaFiltro(String nomeFiltro, String cpfFiltro) {
         EntityManager manager = PersistenceUtil.getEntityManager();
+
         try {
-            String sql = "select u from Usuario u\n" 
-                    + "where u.nome like :filtro or u.sobrenome like :filtro";
+            final String VAZIO = "";
+
+            String sql = "select u from Usuario u\n";
+
+            if (!nomeFiltro.equals(VAZIO) && cpfFiltro.equals(VAZIO)) {
+                sql += "where upper(u.nome) like concat('%', upper(:nomeFiltro), '%')\n";
+            } else if (!cpfFiltro.equals(VAZIO) && nomeFiltro.equals(VAZIO)) {
+                sql += "where u.cpf = :cpfFiltro\n";
+            } else if (!nomeFiltro.equals(VAZIO) && !cpfFiltro.equals(VAZIO)) {
+                sql += "where upper(u.nome) like concat('%', upper(:nomeFiltro), '%')"
+                        + "and u.cpf = :cpfFiltro\n";
+            }
             
-            Query query = manager.createQuery("select u from Usuario u");
-            //query.setParameter("filtro", "'%" + filtro + "%'");
-            query.setMaxResults(1);
+            sql += "order by u.nome";
+
+            Query query = manager.createQuery(sql);
+
+            if (!nomeFiltro.equals(VAZIO)) {
+                query.setParameter("nomeFiltro", nomeFiltro);
+            }
+
+            if (!cpfFiltro.equals(VAZIO)) {
+                query.setParameter("cpfFiltro", cpfFiltro);
+            }
+
             return query.getResultList();
         } finally {
             manager.close();

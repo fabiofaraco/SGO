@@ -2,20 +2,6 @@
 
 $(document).ready(function () {
 
-    carregarScriptPagina = function ()
-    {
-        $(".load-img").fadeOut();
-
-        $('.mascara-cpf').mask('999.999.999-99');
-        $('.mascara-data').mask('00/00/0000');
-        $('.mascara-telefone').mask('(00) 0000-0000');
-        $('.mascara-celular').mask('(00) 00000-0000');
-
-        carregaTabela();
-    };
-
-//  ----------------------------------------------------------------------------
-
     exibirMensagemErro = function (mensagem)
     {
         limparMensagens();
@@ -132,53 +118,23 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------------------
 
-    carregaTabela = function ()
+    criticar = function (options)
     {
-        $('.data-table').DataTable({
-            responsive: {
-                details: {
-                    renderer: function (api, rowIdx, columns) {
-                        var data = $.map(columns, function (col, i) {
-                            return '<tr style="height:30px">' +
-                                    '<td style="width:60px"><b>' + col.title + '</b></td>' +
-                                    '<td>' + col.data + '</td>' +
-                                    '</tr>';
-                        }).join('');
-                        return data ?
-                                $('<table/>').append(data) :
-                                false;
-                    }
-                }
-            },
-            "paging": true,
-            "ordering": true,
-            "lengthMenu": [[5], [5]],
-            "language": {
-                "sEmptyTable": "Nenhum registro encontrado",
-                "sInfo": "",
-                "sInfoEmpty": "",
-                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                "sInfoPostFix": "",
-                "sInfoThousands": ".",
-                "sSearch": "Pesquisar",
-                "sLengthMenu": "",
-                "sLoadingRecords": "Carregando...",
-                "sProcessing": "Processando...",
-                "sZeroRecords": "Nenhum registro encontrado",
-                "oPaginate": {
-                    "sNext": "Próximo",
-                    "sPrevious": "Anterior",
-                    "sFirst": "Primeiro",
-                    "sLast": "Último"
-                },
-                "oAria": {
-                    "sSortAscending": ": Ordenar colunas de forma ascendente",
-                    "sSortDescending": ": Ordenar colunas de forma descendente"
-                }
-            }
-        });
+        if (options.valor === undefined
+                || options.valor === null
+                || options.valor === "".trim())
+        {
+            exibirMensagemErro(options.mensagem);
+            return false;
+        }
+
+        return true;
     };
     
 //  ----------------------------------------------------------------------------
-
+    
+    isEmail = function (email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    };
 });

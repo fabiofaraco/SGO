@@ -92,14 +92,11 @@
     <script src=<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>></script>
     <script src=<c:url value="/resources/js/mensagem.js"/>></script>
     <script src=<c:url value="/resources/js/util.js"/>></script>
+    <script src=<c:url value="/resources/js/ajaxUtil.js"/>></script>
     <script src=<c:url value="/resources/js/menu.js"/>></script>
     <script src=<c:url value="/resources/js/cadastroUsuario.js"/>></script>
-    <script src=<c:url value="/resources/js/tabela.js"/>></script>
+    <script src=<c:url value="/resources/js/cadastroRequerente.js"/>></script>
     <script src=<c:url value="/resources/js/listaUsuario.js"/>></script>
     <script src=<c:url value="/resources/js/listaRequerente.js"/>></script>
     <script src=<c:url value="/resources/js/listaOcorrencia.js"/>></script>
-    <script src=<c:url value="/resources/datatable/js/jquery.dataTables.min.js"/>></script>
-    <script src=<c:url value="/resources/datatable/js/dataTables.bootstrap.min.js"/>></script>
-    <script src=<c:url value="/resources/datatable/js/dataTables.responsive.min.js"/>></script>
-    <script src=<c:url value="/resources/datatable/js/responsive.bootstrap.min.js"/>></script>
 </html>

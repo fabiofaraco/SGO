@@ -15,37 +15,21 @@
             </div>
 
             <div class="row">
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label class="descricao" for="nome">Nome</label>
                         <input type="text" class="form-control" id="nome" name="nome" value="${usuario.nome}" ${disabled} />
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="descricao" for="sobrenome">Sobrenome</label>
-                        <input type="text" class="form-control" id="sobrenome" name="sobrenome" value="${usuario.sobrenome}" ${disabled}/>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-4 col-sm-4">
+                <div class="col-md-3 col-sm-4">
                     <div class="form-group">
                         <label class="descricao" for="cpf">CPF</label>
                         <input type="text" class="form-control mascara-cpf" id="cpf" name="cpf" value="${usuario.cpf}" ${disabled}/>
                     </div>
                 </div>
-                <div class="col-md-5 col-sm-5">
-                    <div class="form-group">
-                        <label class="descricao" for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="${usuario.email}" ${disabled}/>
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-4 col-sm-5">
+                <div class="col-md-3 col-sm-5">
                     <div class="form-group">
                         <label class="descricao" for="perfil">Perfil</label>
                         <select class="form-control" id="perfil" name="perfil" ${disabled}>
@@ -56,6 +40,19 @@
                         </select>
                     </div>
                 </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 col-sm-4">
+                    <div class="form-group">
+                        <label class="descricao" for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="${usuario.email}" ${disabled}/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
             </div>
 
             <div class="row">
@@ -86,5 +83,7 @@
         </div>
 
         <input type="hidden" class="form-control" id="id" name="id" value="${usuario.id}"/>		
+        <input type="hidden" class="form-control" id="nomeFiltro" name="nomeFiltro" value="${nomeFiltro}"/>		
+        <input type="hidden" class="form-control" id="cpfFiltro" name="cpfFiltro" value="${cpfFiltro}"/>		
     </div>
 </div>

@@ -1,26 +1,31 @@
 $(document).ready(function () {
-    var contextPath = $("#contextPath").val();
-
-//  ----------------------------------------------------------------------------
-
     $("#conteudo").on("click", "#btnSalvar", function () {
         if (validaCampos())
         {
-            $.ajax({
-                type: "POST",
-                url: contextPath + "/usuario/salvar",
-                data: $("form").serialize(),
-                dataType: "html",
-                beforeSend: function () {
-                    $(".load-img").fadeIn();
-                },
-                success: function (data) {
-                    $("#conteudo").load(contextPath + "/usuario/lista", function () {
-                        carregarScriptPagina();
-                        exibirMensagemSucesso(data);
-                    });
-                }
-            });
+            if ($("#id").val() === "0")
+            {
+                $("#nomeFiltro").val($("#nome").val());
+                $("#cpfFiltro").val($("#cpf").val());
+            }
+
+            ajaxPostSubmit("/usuario/salvar", $("form").serialize(),
+                    function ()
+                    {
+                        beforeSendDefult();
+                    },
+                    function ()
+                    {
+                        errorDefault();
+                    },
+                    function (data)
+                    {
+                        successDefault("/usuario/filtrar", data,
+                                {
+                                    nomeFiltro: $("#nomeFiltro").val(),
+                                    cpfFiltro: $("#cpfFiltro").val()
+                                });
+                    }
+            );
         }
     });
 
@@ -33,21 +38,14 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------------------
 
-    $("#conteudo").on("focusout", "#cpf", function () {
-        $.ajax({
-            type: "POST",
-            url: contextPath + "/usuario/validaCpf",
-            data: {
-                cpf: $("#cpf").val(),
-                id: $("#id").val()
-            },
-            dataType: "html",
-            success: function (data) {
-                if (data !== "")
-                {
-                    $("#cpf").val("");
-                    exibirMensagemErro(data);
-                }
+    $("#conteudo").on("focusout", "#cpf", function (e) {
+        e.preventDefault();
+
+        ajaxPost("/usuario/validaCpf", {cpf: $("#cpf").val(), id: $("#id").val()}, function (data) {
+            if (data !== "")
+            {
+                $("#cpf").val("");
+                exibirMensagemErro(data);
             }
         });
     });
@@ -61,11 +59,6 @@ $(document).ready(function () {
             return false;
         }
 
-        if (!criticar({valor: $("#sobrenome").val(), mensagem: "Campo Obrigatório: Sobrenome"}))
-        {
-            return false;
-        }
-
         if (!criticar({valor: $("#cpf").val(), mensagem: "Campo Obrigatório: CPF"}))
         {
             return false;
@@ -73,7 +66,12 @@ $(document).ready(function () {
 
         if (!validarCPF($("#cpf").val()))
         {
-            exibirMensagem("O CPF digitado não é válido.");
+            exibirMensagemErro("O CPF digitado não é válido.");
+            return false;
+        }
+
+        if (!criticar({valor: $("#perfil").val(), mensagem: "Campo Obrigatório: Perfil"}))
+        {
             return false;
         }
 
@@ -82,8 +80,9 @@ $(document).ready(function () {
             return false;
         }
 
-        if (!criticar({valor: $("#perfil").val(), mensagem: "Campo Obrigatório: Perfil"}))
+        if (!isEmail($("#email").val()))
         {
+            exibirMensagemErro("Endereço de e-mail inválido.");
             return false;
         }
 
@@ -99,21 +98,6 @@ $(document).ready(function () {
 
         if (!criticarSenha({valor: $("#senha").val(), valorConfirma: $("#confirmaSenha").val()}))
         {
-            return false;
-        }
-
-        return true;
-    };
-
-//  ----------------------------------------------------------------------------
-
-    var criticar = function (options)
-    {
-        if (options.valor === undefined
-                || options.valor === null
-                || options.valor === "".trim())
-        {
-            exibirMensagemErro(options.mensagem);
             return false;
         }
 
@@ -138,5 +122,4 @@ $(document).ready(function () {
 
         return true;
     };
-
 });	

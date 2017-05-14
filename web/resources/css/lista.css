@@ -10,7 +10,8 @@
     color: #FFFFFF;
     font-size: 18px;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .botao-lista:hover,
@@ -18,4 +19,9 @@
     background-color: #006B6B;
     border-color: #006B6B;
     color:#FFFFFF;
+}
+
+.filtro 
+{
+    margin-bottom: 20px !important;
 }

@@ -1,40 +1,63 @@
 $(document).ready(function () {
-    
-    $('#btnIncluirRequerente').on("click", function () {
-        $('#frm').attr('action', 'cadastro');
-        $('#frm').submit();
+    var contextPath = $("#contextPath").val();
+
+    $('#conteudo').on("click", "#btnIncluirRequerente", function () {
+        $(".load-img").fadeIn();
+        $("#conteudo").load(contextPath + "/requerente/cadastro", carregarScriptPagina);
     });
 
 //  ----------------------------------------------------------------	
 
-    $('.data-table').on("click", ".btn-visualizar", function () {
+    $("#conteudo").on("click", ".btn-alterar-requerente", function () {
         var id = $(this).attr('data-id-requerente');
-        $('#frm').attr('action', 'carregar?visualiza=true&id=' + id);
-        $('#frm').submit();
+        $(".load-img").fadeIn();
+        $("#conteudo").load(contextPath + "/requerente/carregar?&id=" + id, carregarScriptPagina);
     });
 
 //  ----------------------------------------------------------------	
 
-    $('.data-table').on("click", ".btn-alterar", function () {
+    $("#conteudo").on("click", ".btn-excluir-requerente", function () {
         var id = $(this).attr('data-id-requerente');
-        $('#frm').attr('action', 'carregar?visualiza=false&id=' + id);
-        $('#frm').submit();
-    });
-
-//  ----------------------------------------------------------------	
-
-    $('.data-table').on("click", ".btn-excluir", function () {
-        var id = $(this).attr('data-id-requerente');
+        var nome = $(this).attr("data-nome-requerente");
+        
+        $("#msgConfirmacao").html("Deseja excluir o requerente " + nome + "?");
         $('.btn-realiza-exclusao-requerente').attr('data-id-requerente', id);
         $('#modal-excluir-requerente').modal('show');
     });
 
+
 //  ----------------------------------------------------------------
 
-    $('.btn-realiza-exclusao-requerente').on("click", function () {
+    $("#conteudo").on("click", ".btn-realiza-exclusao-requerente", function () {
         var id = $(this).attr('data-id-requerente');
 
-        $('#frm').attr('action', 'remover?id=' + id);
-        $('#frm').submit();
+        $.ajax({
+            url: contextPath + "/requerente/remover?id=" + id,
+            data: $("form").serialize(),
+            error: function() {
+                $(".load-img").fadeOut();
+                exibirMensagemErro("Ocorreu um erro inesperado. Operação não realizada.");
+            },
+            beforeSend: function () {
+                $('#modal-excluir-requerente').modal('toggle');
+                $(".load-img").fadeIn();
+            },
+            success: function (data) {
+                $("#conteudo").load(contextPath + "/requerente/lista", function() {
+                    carregarScriptPagina()();
+                    exibirMensagemSucesso(data);
+                });
+            }
+        });
     });
+    
+    carregarScriptPagina = function ()
+    {
+        $(".load-img").fadeOut();
+
+        $('.mascara-cpf').mask('999.999.999-99');
+        $('.mascara-data').mask('00/00/0000');
+        $('.mascara-telefone').mask('(00) 0000-0000');
+        $('.mascara-celular').mask('(00) 00000-0000');
+    };
 });

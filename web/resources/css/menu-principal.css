@@ -8,7 +8,7 @@
     width:100px;
     height:100px;
     position:absolute;
-    top:60%;
+    top:58%;
     left:56%;
     margin-top: -50px;
     margin-left: -50px;
@@ -39,9 +39,25 @@
     color:#FFFFFF;
 }
 
+.botao-filtro
+{
+    background-color: #009999;
+    color: #FFFFFF;
+    font-size: 15px;
+    border-radius: 8px;
+}
+
+.botao-filtro:hover,
+.botao-filtro:focus 
+{
+    background-color: #006B6B;
+    border-color: #006B6B;
+    color:#FFFFFF;
+}
+
 @media (max-width: 768px) { 
     #loading {
-        margin-top: 80%;
+        margin-top: 70%;
         left:50%;
     }
 }
