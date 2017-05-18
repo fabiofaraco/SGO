@@ -1,40 +1,36 @@
+<!DOCTYPE html>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div id="wrapper">
-
     <div class="container-fluid">
         <div class="page-header">
-            <h1>Cadastro de Requerentes</h1>
+            <h1 class="titulo">Cadastro de Requerentes</h1>
         </div>
         <c:import url="mensagem.jsp" />
         <div class="well">
             <div class="row">
-                <div id="divNome" class="col-md-6 col-sm-6">
+                <div class="col-md-6 col-sm-6">
                     <div class="form-group">
                         <label class="descricao" for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" value="${requerente.nome}" ${disabled} />
-                    </div>
-                </div>
-
-                <div id="divSobrenome" class="col-md-6 col-sm-6">
-                    <div class="form-group">
-                        <label class="descricao" for="sobrenome">Sobrenome</label>
-                        <input type="text" class="form-control" id="sobrenome" name="sobrenome" value="${requerente.sobrenome}" ${disabled} />
+                        <input type="text" class="form-control" id="nome" name="nome" value="${requerente.nome}" />
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <div id="divCpf" class="col-md-3 col-sm-3">
+                <div class="col-md-3 col-sm-3">
                     <div class="form-group">
-                        <label class="descricao" for="cpf">CPF</label>
-                        <input type="text" class="form-control mascara-cpf" id="cpf" name="cpf" value="${requerente.cpf}" ${disabled} />
+                        <label class="descricao" for="cpfRequerente">CPF</label>
+                        <input type="text" class="form-control mascara-cpf" id="cpfRequerente" name="cpf" value="${requerente.cpf}" />
                     </div>
                 </div>
 
-                <div id="divNascimento" class="col-md-4 col-sm-3">
+                <div class="col-md-4 col-sm-3">
                     <div class="form-group">
                         <label class="descricao" for="dataNascimento">Nascimento</label>
-                        <input type="text" class="form-control mascara-data" id="dataNascimento" name="dataNascimento" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${requerente.dataNascimento}"/>" ${disabled} />
+                        <input type="text" class="form-control data mascara-data" id="dataNascimento" name="dataNascimento" value="${requerente.dataNascimento}" />
                     </div>
                 </div>
 
@@ -47,13 +43,13 @@
             </div>
 
             <div class="form-group">
-                <label class="titulo" for="residencial">Endereço</label>
+                <label class="titulo" for="residencial">EndereÃ§o</label>
             </div>
 
             <div class="row">
                 <div id="divEndereco" class="col-md-5 col-sm-3">
                     <div class="form-group">
-                        <label class="descricao" for="logradouro">Endereço</label>
+                        <label class="descricao" for="logradouro">EndereÃ§o</label>
                         <input type="text" class="form-control" id="logradouro" name="endereco.logradouro" value="${requerente.endereco.logradouro}" ${disabled} />
                     </div>
                 </div>
@@ -75,10 +71,10 @@
 
             <div class="row">
                 <div class="col-md-5 col-sm-3">
-                    <div id="divEstado" class="form-group">
-                        <label class="descricao" for="estado">Estado</label>
+                    <div class="form-group">
+                        <label class="descricao" for="estadoCpf">Estado</label>
 
-                        <select class="form-control" id="estado" name="endereco.cidade.estado" ${disabled}>
+                        <select class="form-control" id="estadoCpf" name="endereco.cidade.estado">
                             <option value=""><c:out value="Selecione..."/></option>
                             <c:forEach items="${estados}" var="es">
                                 <option value="${es.id}" ${requerente.endereco.cidade.estado.id == es.id? 'selected' : ''}><c:out value="${es.sigla} - ${es.nome}"/></option>
@@ -86,6 +82,7 @@
                         </select>
                     </div>
                 </div>
+                
                 <div class="col-md-5 col-sm-6">
                     <div id="divCidade" class="form-group">
                         <label class="descricao" for="cidade">Cidade</label>
@@ -123,18 +120,14 @@
             <div class="row">
                 <div class="col-md-2 col-sm-4 col-xs-6">
                     <div class="form-group">
-                        <button id="btnSalvar" type="button" class="btn btn-cadastro col-xs-12" ${disabled}>Salvar</button>				  	
-                    </div>
-                </div>
-
-                <div class="col-md-2 col-sm-4 col-xs-6">
-                    <div class="form-group">
-                        <button id="btnVoltar" type="button" class="btn btn-voltar col-xs-12">Retornar</button>				  	
+                        <button id="btnSalvarRequerente" type="button" class="btn botao col-xs-12">Salvar</button>				  	
                     </div>
                 </div>
             </div>
         </div>			
 
         <input type="hidden" class="form-control" id="id" name="id" value="${requerente.id}"/>
+        <input type="hidden" class="form-control" id="nomeFiltro" name="nomeFiltro" value="${nomeFiltro}"/>		
+        <input type="hidden" class="form-control" id="cpfFiltro" name="cpfFiltro" value="${cpfFiltro}"/>		
     </div>
 </div>

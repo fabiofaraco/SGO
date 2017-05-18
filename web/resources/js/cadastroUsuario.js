@@ -1,29 +1,18 @@
 $(document).ready(function () {
     $("#conteudo").on("click", "#btnSalvar", function () {
-        if (validaCampos())
-        {
-            if ($("#id").val() === "0")
-            {
-                $("#nomeFiltro").val($("#nome").val());
-                $("#cpfFiltro").val($("#cpf").val());
-            }
-
+        if (validaCampos()) {
             ajaxPostSubmit("/usuario/salvar", $("form").serialize(),
-                    function ()
-                    {
+                    function () {
                         beforeSendDefult();
                     },
-                    function ()
-                    {
+                    function () {
                         errorDefault();
                     },
-                    function (data)
-                    {
-                        successDefault("/usuario/filtrar", data,
-                                {
-                                    nomeFiltro: $("#nomeFiltro").val(),
-                                    cpfFiltro: $("#cpfFiltro").val()
-                                });
+                    function (data) {
+                        successDefault("/usuario/filtrar", data, {
+                            nomeFiltro: $("#nome").val(),
+                            cpfFiltro: $("#cpf").val()
+                        });
                     }
             );
         }
@@ -42,8 +31,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         ajaxPost("/usuario/validaCpf", {cpf: $("#cpf").val(), id: $("#id").val()}, function (data) {
-            if (data !== "")
-            {
+            if (data !== "") {
                 $("#cpf").val("");
                 exibirMensagemErro(data);
             }

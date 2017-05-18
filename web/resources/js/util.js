@@ -89,9 +89,9 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------------------
 
-    validaData = function (idCampo) {
+    validaData = function (campo) {
         var expReg = new RegExp("(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}");
-        var data = $("#" + idCampo).val().trim();
+        var data = campo;
         var ardt = data.split("/");
         var erro = false;
 
@@ -137,4 +137,6 @@ $(document).ready(function () {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
     };
+
+//  ----------------------------------------------------------------------------
 });

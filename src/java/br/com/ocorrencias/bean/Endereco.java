@@ -14,10 +14,6 @@ public class Endereco {
 	@Column(name="COMPLEMENTO")
 	private String complemento;
 	
-	//@ManyToOne
-	//@JoinColumn(name="ID_ESTADO")
-	//private Estado estado = new Estado();
-	
 	@ManyToOne
 	@JoinColumn(name="ID_CIDADE")
 	private Cidade cidade = new Cidade();

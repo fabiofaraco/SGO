@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
         <link href=<c:url value="/resources/bootstrap/css/bootstrap.min.css"/> rel="stylesheet"/>
+        <link href=<c:url value="/resources/css/jquery-ui-css/jquery-ui.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/mensagem.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/cadastro.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/lista.css"/> rel="stylesheet"/>
@@ -46,16 +47,16 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
                         <li id="liMenu">
-                            <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+                            <a href="javascript:void(0);"><i class="fa fa-fw fa-home"></i> Home</a>
                         </li>
                         <li id="liUsuario">
-                            <a href="#" id="aUsuario"><i class="fa fa-fw fa-user"></i> Usuários</a>
+                            <a href="javascript:void(0);" id="aUsuario"><i class="fa fa-fw fa-user"></i> Usuários</a>
                         </li>
                         <li id="liRequerente">
-                            <a href="#" id="aRequerente"><i class="fa fa-fw fa-users"></i> Requerentes</a>
+                            <a href="javascript:void(0);" id="aRequerente"><i class="fa fa-fw fa-users"></i> Requerentes</a>
                         </li>
                         <li id="liOcorrencia">
-                            <a href="#" id="aOcorrencia"><i class="fa fa-fw fa-ambulance"></i> Ocorrências</a>
+                            <a href="javascript:void(0);" id="aOcorrencia"><i class="fa fa-fw fa-ambulance"></i> Ocorrências</a>
                         </li>
                         <li id="liProtocolo">
                             <a href="${pageContext.request.contextPath}/protocolo/lista"><i class="fa fa-fw fa-folder"></i> Protocolos</a>
@@ -89,6 +90,8 @@
 
     <script src=<c:url value="/resources/js/jquery/jquery-2.2.2.min.js"/>></script>
     <script src=<c:url value="/resources/js/jquery/jquery.mask.min.js"/>></script>
+    <script src=<c:url value="/resources/js/jquery/jquery-ui.js"/>></script>
+    <script src=<c:url value="/resources/js/jquery/jquery-ui.min.js"/>></script>
     <script src=<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>></script>
     <script src=<c:url value="/resources/js/mensagem.js"/>></script>
     <script src=<c:url value="/resources/js/util.js"/>></script>

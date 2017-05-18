@@ -1,63 +1,109 @@
 $(document).ready(function () {
-    var contextPath = $("#contextPath").val();
-
-    $('#conteudo').on("click", "#btnIncluirRequerente", function () {
-        $(".load-img").fadeIn();
-        $("#conteudo").load(contextPath + "/requerente/cadastro", carregarScriptPagina);
+    $('#conteudo').on("click", "#btnIncluirRequerente", function (e) {
+        e.preventDefault();
+        
+        ajaxLoad("/requerente/cadastro");
     });
 
-//  ----------------------------------------------------------------	
+//  ----------------------------------------------------------------------------
 
-    $("#conteudo").on("click", ".btn-alterar-requerente", function () {
+    $("#conteudo").on("click", ".btn-alterar-requerente", function (e) {
+        e.preventDefault();
+        
         var id = $(this).attr('data-id-requerente');
-        $(".load-img").fadeIn();
-        $("#conteudo").load(contextPath + "/requerente/carregar?&id=" + id, carregarScriptPagina);
+
+        ajaxLoad("/requerente/carregar", {
+            id: id,
+            nomeFiltro: $("#nomeFiltro").val(),
+            cpfFiltro: $("#cpfFiltro").val()
+        });
     });
 
-//  ----------------------------------------------------------------	
+//  ----------------------------------------------------------------------------
 
     $("#conteudo").on("click", ".btn-excluir-requerente", function () {
         var id = $(this).attr('data-id-requerente');
         var nome = $(this).attr("data-nome-requerente");
-        
+
         $("#msgConfirmacao").html("Deseja excluir o requerente " + nome + "?");
         $('.btn-realiza-exclusao-requerente').attr('data-id-requerente', id);
         $('#modal-excluir-requerente').modal('show');
     });
 
 
-//  ----------------------------------------------------------------
+//  ----------------------------------------------------------------------------
 
     $("#conteudo").on("click", ".btn-realiza-exclusao-requerente", function () {
         var id = $(this).attr('data-id-requerente');
 
-        $.ajax({
-            url: contextPath + "/requerente/remover?id=" + id,
-            data: $("form").serialize(),
-            error: function() {
-                $(".load-img").fadeOut();
-                exibirMensagemErro("Ocorreu um erro inesperado. Operação não realizada.");
-            },
-            beforeSend: function () {
-                $('#modal-excluir-requerente').modal('toggle');
-                $(".load-img").fadeIn();
-            },
-            success: function (data) {
-                $("#conteudo").load(contextPath + "/requerente/lista", function() {
-                    carregarScriptPagina()();
-                    exibirMensagemSucesso(data);
-                });
-            }
-        });
-    });
-    
-    carregarScriptPagina = function ()
-    {
-        $(".load-img").fadeOut();
+        ajaxPostSubmit("/requerente/remover", {id: id},
+                function () {
+                    $('#modal-excluir-requerente').modal('toggle');
+                    beforeSendDefult();
+                },
+                function () {
+                    var msgErro = "Não foi possível excluir o requerente. "
+                            + "Verifique se ele já não está associado à uma ocorrência.";
 
-        $('.mascara-cpf').mask('999.999.999-99');
-        $('.mascara-data').mask('00/00/0000');
-        $('.mascara-telefone').mask('(00) 0000-0000');
-        $('.mascara-celular').mask('(00) 00000-0000');
+                    errorDefault(msgErro);
+                },
+                function (data, textStatus) {
+
+                    alert(textStatus);
+
+                    successDefault("/requerente/filtrar", data, {
+                        nomeFiltro: $("#nomeFiltro").val(),
+                        cpfFiltro: $("#cpfFiltro").val()
+                    });
+                }
+        );
+    });
+
+//  ----------------------------------------------------------------------------
+
+    $("#conteudo").on("click", "#btnFiltroRequerente", function () {
+        if (validaFiltroRequerente())
+        {
+            ajaxLoad("/requerente/filtrar",
+                    {
+                        nomeFiltro: $("#nomeFiltro").val(),
+                        cpfFiltro: $("#cpfFiltro").val()
+                    });
+        }
+    });
+
+//  ----------------------------------------------------------------------------
+
+    var validaFiltroRequerente = function ()
+    {
+        if ($.trim($("#nomeFiltro").val()) === ""
+                && $.trim($("#cpfFiltro").val()) === "")
+        {
+            exibirMensagemErro("Ao menos um dos campos do filtro deve ser preenchido");
+            return false;
+        }
+
+        if ($.trim($("#nomeFiltro").val()) !== "")
+        {
+            if ($.trim($("#nomeFiltro").val()).length < 3)
+            {
+                exibirMensagemErro("Digite ao menos três letras para realizar a consulta pelo nome.");
+                return false;
+            }
+        }
+
+        if ($.trim($("#cpfFiltro").val()) !== "")
+        {
+            if (!validarCPF($("#cpfFiltro").val()))
+            {
+                exibirMensagemErro("O CPF digitado não é válido.");
+                return false;
+            }
+        }
+
+        return true;
     };
+    
+//  ----------------------------------------------------------------------------
+
 });

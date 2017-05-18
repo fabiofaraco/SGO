@@ -24,8 +24,8 @@ public class GenericDao<T> implements Dao<T> {
             manager.persist(t);
             manager.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
             manager.getTransaction().rollback();
+            throw e;
         } finally {
             manager.close();
         }
@@ -40,8 +40,8 @@ public class GenericDao<T> implements Dao<T> {
             manager.merge(t);
             manager.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
             manager.getTransaction().rollback();
+            throw e;
         } finally {
             manager.close();
         }
@@ -57,8 +57,8 @@ public class GenericDao<T> implements Dao<T> {
             manager.remove(t);
             manager.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
             manager.getTransaction().rollback();
+            throw e;
         } finally {
             manager.close();
         }
@@ -71,6 +71,8 @@ public class GenericDao<T> implements Dao<T> {
 
         try {
             return manager.createQuery(query).getResultList();
+        } catch (Exception e) {
+            throw e;
         } finally {
             manager.close();
         }
@@ -82,7 +84,7 @@ public class GenericDao<T> implements Dao<T> {
         try {
             return manager.find(persistentClass, id);
         } catch (Exception e) {
-            e.printStackTrace();
+            
             return null;
         } finally {
             manager.close();

@@ -11,7 +11,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.ocorrencias.bean.Cidade;
 import br.com.ocorrencias.bean.Estado;
@@ -26,6 +25,7 @@ import br.com.ocorrencias.propertyEditor.CidadePropertyEditor;
 import br.com.ocorrencias.propertyEditor.EstadoPropertyEditor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("requerente")
@@ -44,20 +44,18 @@ public class RequerenteController {
         binder.registerCustomEditor(Cidade.class, new CidadePropertyEditor());
     }
 
-//	---------------------------------------------------------------------------------------------------------------------	
+//  ----------------------------------------------------------------------------
     @RequestMapping("/lista")
-    public String getFormListaRequerente(Model model) {
-        Dao<Requerente> dao = new GenericDao<>(Requerente.class);
-        List<Requerente> requerentes = dao.getLista("select r from Requerente r");
-
-        model.addAttribute("requerentes", requerentes);
+    public String getFormLista(Model model) {
+        model.addAttribute("requerentes", new ArrayList<>());
+        model.addAttribute("msgConsulta", "Para exibir um requerente realize a consulta através do filtro.");
 
         return "lista-requerente";
     }
 
-//	---------------------------------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
     @RequestMapping("/cadastro")
-    public String getFormCadastroRequerente(Requerente requerente, Model model) {
+    public String getFormCadastro(Requerente requerente, Model model) {
         Dao<Estado> daoEstados = new GenericDao<>(Estado.class);
         List<Estado> estados = daoEstados.getLista("select e from Estado e");
 
@@ -66,37 +64,42 @@ public class RequerenteController {
         return "cadastro-requerente";
     }
 
-//	---------------------------------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
     @RequestMapping("/remover")
-    public String removerRequerente(Requerente requerente, RedirectAttributes redirectAttributes) {
+    public @ResponseBody
+    String remover(Requerente requerente) {
         Dao<Requerente> dao = new GenericDao<>(Requerente.class);
+
         dao.remover(requerente.getId());
 
-        
         return "Requerente removido com sucesso.";
     }
 
-//	---------------------------------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
     @RequestMapping("/salvar")
-    public String salvarRequerente(Requerente requerente, RedirectAttributes redirectAttributes) {
+    public @ResponseBody
+    String salvar(Requerente requerente) {
         Dao<Requerente> dao = new GenericDao<>(Requerente.class);
-        String msg = "";
+        String msg;
 
-        if (requerente.getId() == 0) {
-            dao.incluir(requerente);
-            msg = "O requerente " + requerente.getNome() + " foi inclu�do com sucesso";
-        } else {
-            dao.alterar(requerente);
-            msg = "O requerente " + requerente.getNome() + " foi alterado com sucesso";
+        try {
+            if (requerente.getId() == 0) {
+                dao.incluir(requerente);
+                msg = "O requerente " + requerente.getNome() + " foi incluído com sucesso";
+            } else {
+                dao.alterar(requerente);
+                msg = "O requerente " + requerente.getNome() + " foi alterado com sucesso";
+            }
+        } catch (Exception e) {
+            throw e;
         }
 
-        redirectAttributes.addFlashAttribute("msgSuccess", msg);
-        return "redirect:/menuPrincipal";
+        return msg;
     }
 
-//	---------------------------------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
     @RequestMapping("/carregar")
-    public String carregarRequerente(Requerente requerente, Model model) {
+    public String carregar(Requerente requerente, Model model) {
         Dao<Requerente> dao = new GenericDao<>(Requerente.class);
 
         Requerente r = dao.buscar(requerente.getId());
@@ -115,7 +118,7 @@ public class RequerenteController {
         return "cadastro-requerente";
     }
 
-//  ---------------------------------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
     
     @RequestMapping("/validaCpf")
     public @ResponseBody
@@ -123,13 +126,14 @@ public class RequerenteController {
         InterfaceRequerenteDao dao = new RequerenteDao();
 
         if (!dao.validarCpf(cpf, id)) {
-            return "O CPF digitado j� est� cadastrado no sistema";
+            return "O CPF digitado já está cadastrado no sistema";
         }
 
         return "";
     }
 
-//	---------------------------------------------------------------------------------------------------------------------
+//  ----------------------------------------------------------------------------
+    
     @RequestMapping("/carregaCidade")
     public @ResponseBody
     String carregarCidades(int idEstado) {
@@ -146,5 +150,25 @@ public class RequerenteController {
         }
 
         return "";
+    }
+
+//  ----------------------------------------------------------------------------    
+    
+    @RequestMapping("/filtrar")
+    public String filtrar(String nomeFiltro, String cpfFiltro, Model model) {
+        InterfaceRequerenteDao dao = new RequerenteDao();
+
+        try {
+            List<Requerente> requerentes = dao.getListaFiltro(nomeFiltro, cpfFiltro);
+
+            model.addAttribute("requerentes", requerentes);
+            model.addAttribute("msgConsulta", "Não há dados para serem exibidos para esta consulta.");
+            model.addAttribute("nomeFiltro", nomeFiltro);
+            model.addAttribute("cpfFiltro", cpfFiltro);
+        } catch (Exception e) {
+            throw e;
+        }
+
+        return "lista-requerente";
     }
 }

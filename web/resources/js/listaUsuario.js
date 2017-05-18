@@ -36,6 +36,7 @@ $(document).ready(function () {
 
     $("#conteudo").on("click", ".btn-realiza-exclusao-usuario", function (e) {
         e.preventDefault();
+        
         var id = $(this).attr('data-id-usuario');
 
         ajaxPostSubmit("/usuario/remover", {id: id},
@@ -61,8 +62,10 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------	
 
-    $("#conteudo").on("click", "#btnFiltro", function () {
-        if (validaCampos())
+    $("#conteudo").on("click", "#btnFiltro", function (e) {
+        e.preventDefault();
+        
+        if (validaFiltroUsuario())
         {
             ajaxLoad("/usuario/filtrar",
                     {
@@ -74,7 +77,7 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------	
 
-    var validaCampos = function ()
+    var validaFiltroUsuario = function ()
     {
         if ($.trim($("#nomeFiltro").val()) === ""
                 && $.trim($("#cpfFiltro").val()) === "")
@@ -83,10 +86,13 @@ $(document).ready(function () {
             return false;
         }
 
-        if ($.trim($("#nomeFiltro").val()).length < 3)
+        if ($.trim($("#nomeFiltro").val()) !== "")
         {
-            exibirMensagemErro("Digite ao menos três letras para realizar a consulta pelo nome.");
-            return false;
+            if ($.trim($("#nomeFiltro").val()).length < 3)
+            {
+                exibirMensagemErro("Digite ao menos três letras para realizar a consulta pelo nome.");
+                return false;
+            }
         }
 
         if ($.trim($("#cpfFiltro").val()) !== "")

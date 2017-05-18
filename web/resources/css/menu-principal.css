@@ -8,8 +8,8 @@
     width:100px;
     height:100px;
     position:absolute;
-    top:58%;
-    left:56%;
+    top:40%;
+    left:58%;
     margin-top: -50px;
     margin-left: -50px;
 }
@@ -57,13 +57,13 @@
 
 @media (max-width: 768px) { 
     #loading {
-        margin-top: 70%;
+        margin-top: 135px;
         left:50%;
     }
 }
 
 @media (min-width: 769px) and (max-width: 1200px) { 
     #loading {
-        left:62%;
+        left:64%;
     }
 }

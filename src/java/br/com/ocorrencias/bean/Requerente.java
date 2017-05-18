@@ -1,5 +1,6 @@
 package br.com.ocorrencias.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="REQUERENTES")
-public class Requerente {
+public class Requerente implements Serializable {
 	
 	@Id
 	@GeneratedValue
@@ -22,9 +23,6 @@ public class Requerente {
 	
 	@Column(name="NOME")
 	private String nome;
-	
-	@Column(name="SOBRENOME")
-	private String sobrenome;
 	
 	@Column(name="CPF")
 	private String cpf;
@@ -57,12 +55,6 @@ public class Requerente {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public String getSobrenome() {
-		return sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
 	}
 	public String getEmail() {
 		return email;
