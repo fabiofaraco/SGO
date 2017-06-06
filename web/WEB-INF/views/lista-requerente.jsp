@@ -8,22 +8,36 @@
         </div>
         <c:import url="mensagem.jsp" />
 
-        <div class="row filtro">
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <input type="text" id="nomeFiltro" name="nomeFiltro" class="form-control" placeholder="Buscar Nome" value="${nomeFiltro}" />
-                </div>
-            </div>
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <a id="aFiltroRequerente" data-toggle="collapse" href="#filtro" class="link-filtro">
+                    <div class="panel-heading cabecalho-panel">
+                        <span class="glyphicon glyphicon-menu-up text-right"></span>
+                        Filtrar
+                    </div>
+                </a>
+                <div id="filtro" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="row filtro">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <input type="text" id="nomeFiltro" name="nomeFiltro" class="form-control" placeholder="Buscar Nome" value="${nomeFiltro}" />
+                                </div>
+                            </div>
 
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <input type="text" id="cpfFiltro" name="cpfFiltro" class="form-control mascara-cpf" placeholder="Buscar CPF" value="${cpfFiltro}" />
-                </div>
-            </div>
-                
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <button type="button" id="btnFiltroRequerente" name="btnFiltroRequerente" class="btn botao-filtro btn-block btn-sm" >Filtrar </button>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <input type="text" id="cpfFiltro" name="cpfFiltro" class="form-control mascara-cpf" placeholder="Buscar CPF" value="${cpfFiltro}" />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <button type="button" id="btnFiltroRequerente" name="btnFiltroRequerente" class="btn botao-filtro btn-block btn-sm" >Filtrar </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,60 +53,78 @@
                                         <div class="col-xs-12">
                                             <h4 class="list-group-item-heading titulo">${requerente.nome}</h4>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-6">
-                                            <label class="titulo">CPF:</label>
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">CPF:</label>
+                                        <div class="col-xs-8 col-sm-4">
                                             <label class="descricao">${requerente.cpf}</label>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-6">
-                                            <label class="titulo">Nascimento:</label>
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">Nascimento:</label>
+                                        <div class="col-xs-8 col-sm-4">
                                             <label class="descricao lbl-formata-data">${requerente.dataNascimento}</label>
                                         </div>
-
-                                        <div class="col-xs-12">
-                                            <label class="titulo">E-mail:</label>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">E-mail:</label>
+                                        <div class="col-xs-8 col-sm-10">
                                             <label class="descricao">${requerente.email}</label>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-12 col-md-6">
-                                            <label class="titulo">Endereço:</label>
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">Endereço:</label>
+                                        <div class="col-xs-8 col-sm-10">
                                             <label class="descricao">
                                                 ${requerente.endereco.logradouro},
                                                 ${requerente.endereco.complemento}
                                             </label>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-12 col-md-4">
-                                            <label class="titulo">Bairro:</label>
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">Bairro:</label>
+                                        <div class="col-xs-8 col-sm-10">
                                             <label class="descricao">
                                                 ${requerente.endereco.bairro}
                                             </label>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-6">
-                                            <label class="titulo">Cidade:</label>
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">Cidade:</label>
+                                        <div class="col-xs-8 col-sm-4">
                                             <label class="descricao">
                                                 ${requerente.endereco.cidade.nome}
                                             </label>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-6">
-                                            <label class="titulo">Estado:</label>
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">Estado:</label>
+                                        <div class="col-xs-8 col-sm-4">
                                             <label class="descricao">
                                                 ${requerente.endereco.cidade.estado.sigla} 
                                             </label>
                                         </div>
+                                    </div>
 
-                                        <div class="col-sm-6">
-                                            <label class="titulo">Tel Res:</label>
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">Tel Res:</label>
+                                        <div class="col-xs-8 col-sm-4">
                                             <label class="descricao">
                                                 ${requerente.telefone.residencial} 
                                             </label>
                                         </div>
+                                    </div>
 
-                                        <div class="col-xs-12 col-md-6 col-sm-6">
-                                            <label class="titulo">Tel Cel:</label>
+                                    <div class="form-group">
+                                        <label class="titulo col-xs-4 col-sm-2">Tel Cel:</label>
+                                        <div class="col-xs-8 col-sm-4">
                                             <label class="descricao">
                                                 ${requerente.telefone.celular} 
                                             </label>

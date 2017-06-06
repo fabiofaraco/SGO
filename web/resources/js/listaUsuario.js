@@ -1,14 +1,14 @@
-/* global carregarScriptPagina */
-
 $(document).ready(function () {
-    $('#conteudo').on("click", "#btnIncluirUsuario", function (e) {
+    $('#conteudo').on("click", "#btnIncluirUsuario", function (e)
+    {
         e.preventDefault();
         ajaxLoad("/usuario/cadastro", null);
     });
 
 //  ----------------------------------------------------------------	
 
-    $("#conteudo").on("click", ".btn-alterar", function (e) {
+    $("#conteudo").on("click", ".btn-alterar", function (e)
+    {
         e.preventDefault();
         var id = $(this).attr('data-id-usuario');
         ajaxLoad("/usuario/carregar",
@@ -21,7 +21,8 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------	
 
-    $("#conteudo").on("click", ".btn-excluir", function (e) {
+    $("#conteudo").on("click", ".btn-excluir", function (e)
+    {
         e.preventDefault();
         var id = $(this).attr('data-id-usuario');
         var nome = $(this).attr("data-nome-usuario");
@@ -34,9 +35,10 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------
 
-    $("#conteudo").on("click", ".btn-realiza-exclusao-usuario", function (e) {
+    $("#conteudo").on("click", ".btn-realiza-exclusao-usuario", function (e)
+    {
         e.preventDefault();
-        
+
         var id = $(this).attr('data-id-usuario');
 
         ajaxPostSubmit("/usuario/remover", {id: id},
@@ -62,9 +64,10 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------	
 
-    $("#conteudo").on("click", "#btnFiltro", function (e) {
+    $("#conteudo").on("click", "#btnFiltro", function (e)
+    {
         e.preventDefault();
-        
+
         if (validaFiltroUsuario())
         {
             ajaxLoad("/usuario/filtrar",
@@ -73,6 +76,16 @@ $(document).ready(function () {
                         cpfFiltro: $("#cpfFiltro").val()
                     });
         }
+    });
+
+//  ----------------------------------------------------------------	
+
+    $("#conteudo").on("click", "#aFiltroUsuario", function (e)
+    {
+        e.preventDefault();
+
+        $("#aFiltroUsuario span").toggleClass("glyphicon glyphicon-menu-up");
+        $("#aFiltroUsuario span").toggleClass("glyphicon glyphicon-menu-down");
     });
 
 //  ----------------------------------------------------------------	

@@ -1,12 +1,13 @@
 package br.com.ocorrencias.bean;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class Endereco {
+public class Endereco implements Serializable {
 	
 	@Column(name="LOGRADOURO")
 	private String logradouro;

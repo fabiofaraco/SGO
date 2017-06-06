@@ -1,5 +1,6 @@
 package br.com.ocorrencias.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,65 +15,112 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="OCORRENCIAS")
-public class Ocorrencia {
-	
-	@Id
-	@GeneratedValue
-	@Column(name="ID")
-	private int id;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name="DT_OCORRENCIA")
-	private Date data = new Date();
-	
-	@ManyToOne
-	@JoinColumn(name="ID_EVENTO")
-	private Evento evento = new Evento();
-	
-	@Embedded
-	private Endereco endereco = new Endereco();
-	
-	@Column(name="RELATO_FATOS")
-	private String relato;
+@Table(name = "OCORRENCIAS")
+public class Ocorrencia implements Serializable {
 
-	public int getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
+    private int id;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "DATA")
+    private Date data = new Date();
 
-	public Date getData() {
-		return data;
-	}
+    @Column(name = "RESPONSAVEL")
+    private String responsavel;
 
-	public void setData(Date data) {
-		this.data = data;
-	}
+    @ManyToOne
+    @JoinColumn(name = "ID_EVENTO")
+    private Evento evento = new Evento();
 
-	public Evento getEvento() {
-		return evento;
-	}
+    @Embedded
+    private Endereco endereco = new Endereco();
 
-	public void setEvento(Evento evento) {
-		this.evento = evento;
-	}
+    @Column(name = "RELATO")
+    private String relato;
 
-	public Endereco getEndereco() {
-		return endereco;
-	}
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getRelato() {
-		return relato;
-	}
+    /**
+     * @return the data
+     */
+    public Date getData() {
+        return data;
+    }
 
-	public void setRelato(String relato) {
-		this.relato = relato;
-	}
+    /**
+     * @param data the data to set
+     */
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    /**
+     * @return the responsavel
+     */
+    public String getResponsavel() {
+        return responsavel;
+    }
+
+    /**
+     * @param responsavel the responsavel to set
+     */
+    public void setResponsavel(String responsavel) {
+        this.responsavel = responsavel;
+    }
+
+    /**
+     * @return the evento
+     */
+    public Evento getEvento() {
+        return evento;
+    }
+
+    /**
+     * @param evento the evento to set
+     */
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
+    /**
+     * @return the endereco
+     */
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    /**
+     * @param endereco the endereco to set
+     */
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    /**
+     * @return the relato
+     */
+    public String getRelato() {
+        return relato;
+    }
+
+    /**
+     * @param relato the relato to set
+     */
+    public void setRelato(String relato) {
+        this.relato = relato;
+    }
 }

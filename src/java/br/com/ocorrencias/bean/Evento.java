@@ -1,5 +1,6 @@
 package br.com.ocorrencias.bean;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="EVENTOS")
-public class Evento {
+public class Evento implements Serializable {
 	
 	@Id
 	@GeneratedValue

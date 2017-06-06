@@ -1,15 +1,17 @@
 $(document).ready(function () {
-    $('#conteudo').on("click", "#btnIncluirRequerente", function (e) {
+    $('#conteudo').on("click", "#btnIncluirRequerente", function (e)
+    {
         e.preventDefault();
-        
+
         ajaxLoad("/requerente/cadastro");
     });
 
 //  ----------------------------------------------------------------------------
 
-    $("#conteudo").on("click", ".btn-alterar-requerente", function (e) {
+    $("#conteudo").on("click", ".btn-alterar-requerente", function (e)
+    {
         e.preventDefault();
-        
+
         var id = $(this).attr('data-id-requerente');
 
         ajaxLoad("/requerente/carregar", {
@@ -21,7 +23,8 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------------------
 
-    $("#conteudo").on("click", ".btn-excluir-requerente", function () {
+    $("#conteudo").on("click", ".btn-excluir-requerente", function ()
+    {
         var id = $(this).attr('data-id-requerente');
         var nome = $(this).attr("data-nome-requerente");
 
@@ -33,7 +36,8 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------------------
 
-    $("#conteudo").on("click", ".btn-realiza-exclusao-requerente", function () {
+    $("#conteudo").on("click", ".btn-realiza-exclusao-requerente", function ()
+    {
         var id = $(this).attr('data-id-requerente');
 
         ajaxPostSubmit("/requerente/remover", {id: id},
@@ -61,7 +65,8 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------------------
 
-    $("#conteudo").on("click", "#btnFiltroRequerente", function () {
+    $("#conteudo").on("click", "#btnFiltroRequerente", function ()
+    {
         if (validaFiltroRequerente())
         {
             ajaxLoad("/requerente/filtrar",
@@ -70,6 +75,16 @@ $(document).ready(function () {
                         cpfFiltro: $("#cpfFiltro").val()
                     });
         }
+    });
+
+//  ----------------------------------------------------------------------------
+
+    $("#conteudo").on("click", "#aFiltroRequerente", function (e)
+    {
+        e.preventDefault();
+
+        $("#aFiltroRequerente span").toggleClass("glyphicon glyphicon-menu-up");
+        $("#aFiltroRequerente span").toggleClass("glyphicon glyphicon-menu-down");
     });
 
 //  ----------------------------------------------------------------------------
@@ -103,7 +118,7 @@ $(document).ready(function () {
 
         return true;
     };
-    
+
 //  ----------------------------------------------------------------------------
 
 });

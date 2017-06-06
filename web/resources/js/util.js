@@ -32,7 +32,8 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------------------
 
-    validarCPF = function (cpf) {
+    validarCPF = function (cpf)
+    {
         var strCPF = cpf;
         strCPF = strCPF.replace(/[^\d]+/g, '');
 
@@ -89,7 +90,8 @@ $(document).ready(function () {
 
 //  ----------------------------------------------------------------------------
 
-    validaData = function (campo) {
+    validaData = function (campo)
+    {
         var expReg = new RegExp("(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}");
         var data = campo;
         var ardt = data.split("/");
@@ -130,13 +132,31 @@ $(document).ready(function () {
 
         return true;
     };
-    
+
 //  ----------------------------------------------------------------------------
-    
-    isEmail = function (email) {
+
+    isEmail = function (email)
+    {
         var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
     };
 
 //  ----------------------------------------------------------------------------
+
+    isDoubleClicked = function (element)
+    {
+        if (element.data("isclicked"))
+        {
+            return true;
+        }
+
+        element.data("isclicked", true);
+        
+        setTimeout(function () {
+            element.removeData("isclicked");
+        }, 1500);
+
+        return false;
+    };
+
 });

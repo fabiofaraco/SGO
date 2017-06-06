@@ -15,7 +15,8 @@
 }
 
 .botao-lista:hover,
-.botao-lista:focus {
+.botao-lista:focus 
+{
     background-color: #006B6B;
     border-color: #006B6B;
     color:#FFFFFF;
@@ -24,4 +25,26 @@
 .filtro 
 {
     margin-bottom: 20px !important;
+}
+
+.filtro-header
+{
+    font-size: 13px;
+}
+
+.cabecalho-panel
+{
+    background-color: #009999 !important;
+}
+
+.link-filtro
+{
+    color: #FFFFFF;
+    font-size: 15px;
+}
+
+.link-filtro:hover,
+.link-filtro:focus
+{
+    color: #FFFFFF;
 }
