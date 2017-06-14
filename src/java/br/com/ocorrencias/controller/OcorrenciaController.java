@@ -18,8 +18,8 @@ import br.com.ocorrencias.dao.Dao;
 import br.com.ocorrencias.dao.EnderecoDao;
 import br.com.ocorrencias.dao.GenericDao;
 import br.com.ocorrencias.dao.InterfaceEnderecoDao;
-import br.com.ocorrencias.propertyEditor.CidadePropertyEditor;
-import br.com.ocorrencias.propertyEditor.EstadoPropertyEditor;
+import br.com.fabio.propertyEditor.CidadePropertyEditor;
+import br.com.fabio.propertyEditor.EstadoPropertyEditor;
 import br.com.ocorrencias.propertyEditor.EventoPropertyEditor;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -42,7 +42,7 @@ public class OcorrenciaController {
     public String formLista(Model model) {
         model.addAttribute("ocorrencias", new ArrayList<>());
         model.addAttribute("msgConsulta", "Para exibir uma ocorrência realize a consulta através do filtro.");
-        
+
         return "lista-ocorrencia";
     }
 
@@ -63,46 +63,46 @@ public class OcorrenciaController {
 
 //	--------------------------------------------------------------------------------------------------------------
     @RequestMapping("/salvar")
-    public String salvarOcorrencia(Ocorrencia ocorrencia, RedirectAttributes redirectAttributes) {
+    public @ResponseBody
+    String salvarOcorrencia(Ocorrencia ocorrencia, RedirectAttributes redirectAttributes) {
         Dao<Ocorrencia> dao = new GenericDao<>(Ocorrencia.class);
-        String msg = "";
+        String msg;
 
-        if (ocorrencia.getId() == 0) {
-            dao.incluir(ocorrencia);
-            msg = "Ocorr�ncia inclu�da com sucesso";
-        } else {
-            dao.alterar(ocorrencia);
-            msg = "Ocorr�ncia alterada com sucesso";
+        try {
+            if (ocorrencia.getId() == 0) {
+                dao.incluir(ocorrencia);
+                msg = "Ocorrência incluída com sucesso";
+            } else {
+                dao.alterar(ocorrencia);
+                msg = "Ocorrência alterada com sucesso";
+            }
+        } catch (Exception e) {
+            throw e;
         }
 
-        redirectAttributes.addFlashAttribute("msgSuccess", msg);
-        return "redirect:/menuPrincipal";
+        return msg;
     }
 
 //	--------------------------------------------------------------------------------------------------------------
     @RequestMapping("/carregar")
     public String carregarUsuario(Ocorrencia ocorrencia, boolean visualiza, Model model) {
-        Dao<Ocorrencia> dao = new GenericDao<Ocorrencia>(Ocorrencia.class);
+        Dao<Ocorrencia> dao = new GenericDao<>(Ocorrencia.class);
 
         Ocorrencia occurrence = dao.buscar(ocorrencia.getId());
 
-        Dao<Estado> daoEstados = new GenericDao<Estado>(Estado.class);
+        Dao<Estado> daoEstados = new GenericDao<>(Estado.class);
         List<Estado> estados = daoEstados.getLista("select e from Estado e");
 
         InterfaceEnderecoDao daoEndereco = new EnderecoDao();
         List<Cidade> cidades = daoEndereco.carregarCidade(occurrence.getEndereco().getCidade().getEstado().getId());
 
-        Dao<Evento> daoEvento = new GenericDao<Evento>(Evento.class);
+        Dao<Evento> daoEvento = new GenericDao<>(Evento.class);
         List<Evento> eventos = daoEvento.getLista("select ev from Evento ev");
 
         model.addAttribute("estados", estados);
         model.addAttribute("cidades", cidades);
         model.addAttribute("eventos", eventos);
         model.addAttribute("ocorrencia", occurrence);
-
-        if (visualiza) {
-            model.addAttribute("disabled", "disabled");
-        }
 
         return "cadastro-ocorrencia";
     }

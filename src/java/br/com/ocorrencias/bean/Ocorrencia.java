@@ -1,5 +1,6 @@
 package br.com.ocorrencias.bean;
 
+import br.com.fabio.entity.Endereco;
 import java.io.Serializable;
 import java.util.Date;
 

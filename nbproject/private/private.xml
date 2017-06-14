@@ -3,14 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ffara/Desktop/workspace/gerenciador/web/WEB-INF/views/menu-principal.jsp</file>
-            <file>file:/C:/Users/ffara/Desktop/workspace/gerenciador/web/WEB-INF/views/lista-ocorrencia.jsp</file>
-            <file>file:/C:/Users/ffara/Desktop/workspace/gerenciador/web/resources/js/listaRequerente.js</file>
-            <file>file:/C:/Users/ffara/Desktop/workspace/gerenciador/web/WEB-INF/views/cadastro-ocorrencia.jsp</file>
-            <file>file:/C:/Users/ffara/Desktop/workspace/gerenciador/web/WEB-INF/views/cadastro-requerente.jsp</file>
-            <file>file:/C:/Users/ffara/Desktop/workspace/gerenciador/src/java/br/com/ocorrencias/controller/OcorrenciaController.java</file>
             <file>file:/C:/Users/ffara/Desktop/workspace/gerenciador/src/java/br/com/ocorrencias/controller/RequerenteController.java</file>
-            <file>file:/C:/Users/ffara/Desktop/workspace/gerenciador/web/resources/js/listaOcorrencia.js</file>
         </group>
     </open-files>
 </project-private>

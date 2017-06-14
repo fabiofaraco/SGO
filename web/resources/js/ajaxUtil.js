@@ -93,11 +93,18 @@ $(document).ready(function () {
             yearRange: "c-100:c+20"
         });
 
+        $(".data-hora").datetimepicker({
+             dateFormat: 'dd-mm-yy'
+        });
+
         $('input.data').each(function () {
             var anoMesDia = $(this).val().split("-");
+            
             $(this).val($.datepicker.formatDate('dd/mm/yy',
                     new Date(anoMesDia[0], anoMesDia[1] - 1, anoMesDia[2])));
         });
+        
+       
 
         $('.mascara-data').mask('99/99/9999');
         $('.mascara-cpf').mask('999.999.999-99');

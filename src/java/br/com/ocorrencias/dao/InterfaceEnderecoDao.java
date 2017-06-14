@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.ocorrencias.bean.Cidade;
-import br.com.ocorrencias.bean.Endereco;
+import br.com.fabio.entity.Endereco;
 import br.com.ocorrencias.bean.Ocorrencia;
 
 public interface InterfaceEnderecoDao extends Dao<Endereco> {

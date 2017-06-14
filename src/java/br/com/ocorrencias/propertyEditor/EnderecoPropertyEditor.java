@@ -2,7 +2,7 @@ package br.com.ocorrencias.propertyEditor;
 
 import java.beans.PropertyEditorSupport;
 
-import br.com.ocorrencias.bean.Endereco;
+import br.com.fabio.entity.Endereco;
 
 
 public class EnderecoPropertyEditor  extends PropertyEditorSupport {

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div id="wrapper">
+<div id="wrapper" class="listaOcorrencia">
     <div class="container-fluid">
         <div class="page-header">
             <h1 class="titulo">Lista de Ocorrências</h1>
@@ -107,12 +107,12 @@
                 <div class="col-xs-12 col-sm-3 col-md-2">
                     <div class="form-group">
                         <button type="button" class="btn btn-link btn-alterar-ocorrencia" 
-                                data-id-usuario="${ocorrencia.id}">
+                                data-id-ocorrencia="14">
                             <span class="glyphicon glyphicon-pencil"></span> Alterar
                         </button>
 
                         <button type="button" class="btn btn-link btn-excluir-ocorrencia" 
-                                data-id-usuario="${ocorrencia.id}" 
+                                data-id-ocorrencia="${ocorrencia.id}" 
                                 data-toggle="modal">
                             <span class="glyphicon glyphicon-trash"></span> Remover
                         </button>

@@ -1,5 +1,6 @@
 package br.com.ocorrencias.bean;
 
+
 import java.io.Serializable;
 import java.util.Date;
 

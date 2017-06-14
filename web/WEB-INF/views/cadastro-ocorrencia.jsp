@@ -1,19 +1,23 @@
-<div id="wrapper">
-    <c:import url="menu-principal.jsp" />   
+<!DOCTYPE html>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<div id="wrapper" class="cadOcorrencia">
     <div class="container-fluid">
         <div class="page-header">
-            <h1 class="titulo">Cadastro de Ocorrências</h1>
+            <h1 class="titulo">Cadastro de OcorrÃªncias</h1>
         </div>
         <c:import url="mensagem.jsp" />
 
         <div class="well">
             <div class="form-group">
-                <label class="titulo">Dados da Ocorrência</label>
+                <label class="titulo">Dados da OcorrÃªncia</label>
 
                 <div class="row">
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group">
-                            <label class="descricao" for="evento">Natureza da Ocorrência</label>
+                            <label class="descricao" for="evento">Natureza da OcorrÃªncia</label>
 
                             <select class="form-control" id="evento" name="evento">
                                 <option value=""><c:out value="Selecione..."/></option>
@@ -26,8 +30,15 @@
 
                     <div class="col-md-4 col-sm-6">
                         <div class="form-group">
-                            <label class="descricao" for="responsavel">Responsável</label>
+                            <label class="descricao" for="responsavel">ResponsÃ¡vel</label>
                             <input type="text" class="form-control" id="responsavel" name="responsavel" value="${ocorrencia.responsavel}" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6">
+                        <div class="form-group">
+                            <label class="descricao" for="data">Data da OcorrÃªncia</label>
+                            <input type="text" class="form-control data-hora" id="data" name="data" value="${ocorrencia.data}" />
                         </div>
                     </div>
                 </div>
@@ -35,7 +46,7 @@
                 <div class="row">
                     <div id="divEndereco" class="col-md-5 col-sm-3">
                         <div class="form-group">
-                            <label class="descricao" for="logradouro">Endereço</label>
+                            <label class="descricao" for="logradouro">EndereÃ§o</label>
                             <input type="text" class="form-control" id="logradouro" name="endereco.logradouro" value="${ocorrencia.endereco.logradouro}" />
                         </div>
                     </div>
@@ -58,9 +69,9 @@
                 <div class="row">
                     <div class="col-md-5 col-sm-3">
                         <div class="form-group">
-                            <label class="descricao" for="estadoCpf">Estado</label>
+                            <label class="descricao" for="estado">Estado</label>
 
-                            <select class="form-control" id="estadoCpf" name="endereco.cidade.estado">
+                            <select class="form-control" id="estado" name="endereco.cidade.estado">
                                 <option value=""><c:out value="Selecione..."/></option>
                                 <c:forEach items="${estados}" var="es">
                                     <option value="${es.id}" ${ocorrencia.endereco.cidade.estado.id == es.id? 'selected' : ''}><c:out value="${es.sigla} - ${es.nome}"/></option>
@@ -95,7 +106,7 @@
                 <div class="row">
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="form-group">
-                            <button id="btnSalvar" type="button" class="btn botao col-xs-12">Salvar</button>				  	
+                            <button id="btnSalvarOcorrencia" type="button" class="btn botao col-xs-12">Salvar</button>				  	
                         </div>
                     </div>
                 </div>

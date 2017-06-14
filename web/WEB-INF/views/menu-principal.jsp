@@ -10,6 +10,7 @@
 
         <link href=<c:url value="/resources/bootstrap/css/bootstrap.min.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/jquery-ui-css/jquery-ui.css"/> rel="stylesheet"/>
+        <link href=<c:url value="/resources/css/jquery-ui-css/jquery.datetimepicker.min.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/mensagem.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/cadastro.css"/> rel="stylesheet"/>
         <link href=<c:url value="/resources/css/lista.css"/> rel="stylesheet"/>
@@ -92,6 +93,7 @@
     <script src=<c:url value="/resources/js/jquery/jquery.mask.min.js"/>></script>
     <script src=<c:url value="/resources/js/jquery/jquery-ui.js"/>></script>
     <script src=<c:url value="/resources/js/jquery/jquery-ui.min.js"/>></script>
+    <script src=<c:url value="/resources/js/jquery/jquery.datetimepicker.full.js"/>></script>
     <script src=<c:url value="/resources/bootstrap/js/bootstrap.min.js"/>></script>
     <script src=<c:url value="/resources/js/mensagem.js"/>></script>
     <script src=<c:url value="/resources/js/util.js"/>></script>
@@ -99,6 +101,7 @@
     <script src=<c:url value="/resources/js/menu.js"/>></script>
     <script src=<c:url value="/resources/js/cadastroUsuario.js"/>></script>
     <script src=<c:url value="/resources/js/cadastroRequerente.js"/>></script>
+    <script src=<c:url value="/resources/js/cadastroOcorrencia.js"/>></script>
     <script src=<c:url value="/resources/js/listaUsuario.js"/>></script>
     <script src=<c:url value="/resources/js/listaRequerente.js"/>></script>
     <script src=<c:url value="/resources/js/listaOcorrencia.js"/>></script>

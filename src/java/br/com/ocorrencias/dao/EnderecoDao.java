@@ -8,7 +8,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.ocorrencias.bean.Cidade;
-import br.com.ocorrencias.bean.Endereco;
+import br.com.fabio.entity.Endereco;
 import br.com.ocorrencias.bean.Ocorrencia;
 import br.com.ocorrencias.util.PersistenceUtil;
 
